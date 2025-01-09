@@ -1,0 +1,40 @@
+# syntax = docker/dockerfile:1
+
+# Development version of the Dockerfile
+ARG RUBY_VERSION=3.1.0
+FROM docker.io/library/ruby:$RUBY_VERSION-slim
+
+# Rails app lives here
+WORKDIR /rails
+
+# Install base packages and development dependencies
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    curl \
+    libjemalloc2 \
+    libvips \
+    sqlite3 \
+    build-essential \
+    git \
+    pkg-config && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Set development environment
+ENV RAILS_ENV="development" \
+    BUNDLE_PATH="/usr/local/bundle" \
+    BUNDLE_WITHOUT=""
+
+# Copy Gemfiles for installation
+COPY Gemfile Gemfile.lock ./
+
+# Install application gems
+RUN bundle install
+
+# Copy application code
+COPY . .
+
+# Expose development port
+EXPOSE 3000
+
+# Start the server by default, binding to 0.0.0.0 to allow external access
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"] 

@@ -1,13 +1,9 @@
 FactoryBot.define do
   factory :weather_forecast do
-    zip_code { nil }
-    city { "MyString" }
-    state { "MyString" }
-    current_temp { "9.99" }
-    temp_max { "9.99" }
-    temp_low { "9.99" }
-    date { "2025-01-09 18:41:03" }
-    latitude { "9.99" }
-    longitude { "9.99" }
+    zip_code { create(:zip_code) }
+    current_temp { 70.0 }
+    high_temp { 75.0 }
+    low_temp { 65.0 }
+    date { Date.today }
   end
 end

@@ -1,16 +1,16 @@
 class WeatherService
   include HTTParty
-  base_uri 'api.weatherapi.com/v1'
-# fetch(`https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7`)
+  base_uri "api.weatherapi.com/v1"
+  # fetch(`https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7`)
   def initialize
     @api_key = Rails.application.credentials.weatherapi[:api_key]
     # @api_key = "b0ec7e80c19b41ae8e7200423200511"
   end
 
   def get_forecast(latitude, longitude)
-    response = self.class.get('/forecast.json', query: {
+    response = self.class.get("/forecast.json", query: {
       q: "#{latitude},#{longitude}",
-      key: @api_key,
+      key: @api_key
     })
 
     if response.success?
@@ -25,18 +25,18 @@ class WeatherService
 
   def parse_forecast_response(response)
     data = response.parsed_response
- 
+
     {
-        city: data.dig('location', 'name'),
-        state: data.dig('location', 'region'),
-        current_temp: data.dig('current', 'temp_f'),
-        last_updated: data.dig('current', 'last_updated'),
-        feels_like: data.dig('current', 'feelslike_f'),
-        wind_speed: data.dig('current', 'wind_mph'),
-        condition: data.dig('current', 'condition', 'text'),
-        condition_icon: data.dig('current', 'condition', 'icon'),
-        high_temp: data.dig('forecast', 'forecastday').first.dig('day', 'maxtemp_f'),
-        low_temp: data.dig('forecast', 'forecastday').first.dig('day', 'mintemp_f'),
+        city: data.dig("location", "name"),
+        state: data.dig("location", "region"),
+        current_temp: data.dig("current", "temp_f"),
+        last_updated: data.dig("current", "last_updated"),
+        feels_like: data.dig("current", "feelslike_f"),
+        wind_speed: data.dig("current", "wind_mph"),
+        condition: data.dig("current", "condition", "text"),
+        condition_icon: data.dig("current", "condition", "icon"),
+        high_temp: data.dig("forecast", "forecastday").first.dig("day", "maxtemp_f"),
+        low_temp: data.dig("forecast", "forecastday").first.dig("day", "mintemp_f")
     }
   end
 end

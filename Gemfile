@@ -64,5 +64,5 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'geocoder'
-gem 'httparty'
+gem "geocoder"
+gem "httparty"

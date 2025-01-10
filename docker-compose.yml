@@ -16,6 +16,14 @@ services:
     stdin_open: true
     tty: true
     command: ./bin/rails server -b 0.0.0.0
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/rails
+      - bundle_cache:/usr/local/bundle
+    command: bundle exec rspec
 
 volumes:
   bundle_cache:

@@ -10,5 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 0) do
+ActiveRecord::Schema[7.2].define(version: 2025_01_09_234103) do
+  create_table "weather_forecasts", force: :cascade do |t|
+    t.integer "zip_code_id", null: false
+    t.string "city"
+    t.string "state"
+    t.decimal "current_temp", null: false
+    t.decimal "temp_max"
+    t.decimal "temp_low"
+    t.datetime "date", null: false
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["zip_code_id"], name: "index_weather_forecasts_on_zip_code_id"
+  end
+
+  create_table "zip_codes", force: :cascade do |t|
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_zip_codes_on_code", unique: true
+  end
+
+  add_foreign_key "weather_forecasts", "zip_codes"
 end

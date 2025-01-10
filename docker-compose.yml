@@ -15,7 +15,7 @@ services:
       - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     stdin_open: true
     tty: true
-    command: ./bin/rails server -b 0.0.0.0
+    command: bash -c "bundle install && ./bin/rails server -b 0.0.0.0"
   test:
     build:
       context: .
@@ -23,7 +23,7 @@ services:
     volumes:
       - .:/rails
       - bundle_cache:/usr/local/bundle
-    command: bundle exec rspec
+    command: bash -c "bundle install && bundle exec rspec"
 
 volumes:
   bundle_cache:

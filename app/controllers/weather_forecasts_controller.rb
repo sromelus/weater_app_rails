@@ -8,15 +8,31 @@ class WeatherForecastsController < ApplicationController
   end
 
   def search
-    # Assuming lat/lng are passed as parameters
-    # if params[:latitude].present? && params[:longitude].present?
-      results = Geocoder.search([37.7749, -122.4194])
-      @zipcode = results.first&.postal_code
-      @weather_forecasts = WeatherForecast.where(zip_code_id: ZipCode.find_by(code: @zipcode))
-    # else
-    #   @weather_forecasts = WeatherForecast.all
-    # end
-  
+    if params[:address].present?
+      results = Geocoder.search(params[:address])
+      if location = results.first
+        @latitude = location.latitude
+        @longitude = location.longitude
+        @zipcode = location.postal_code
+
+
+        zip_code = ZipCode.find_or_create_by(code: @zipcode)
+        weather_service = WeatherService.new
+        forecast_data = weather_service.get_forecast(@latitude, @longitude)
+
+        @weather_forecasts = if forecast_data
+          WeatherForecast.create_or_update_from_api(forecast_data, zip_code)
+        else
+          []
+        end
+      else
+        flash.now[:alert] = "Could not find location for that address"
+        @weather_forecasts = []
+      end
+    else
+      @weather_forecasts = WeatherForecast.all
+    end
+
     render :index
   end
 

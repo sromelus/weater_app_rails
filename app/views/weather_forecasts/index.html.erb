@@ -97,7 +97,7 @@
 
 <div class="search-container">
   <%= form_with url: weather_forecasts_search_path, method: :get, remote: true, class: "search-form", data: { turbo: false } do %>
-    <%= text_field_tag :city, nil, placeholder: "Enter city", class: "search-input" %>
+    <%= text_field_tag :address, "61 locust st, medford, ma", placeholder: "Enter address", class: "search-input" %>
     <%= submit_tag "Search", class: "search-button" %>
   <% end %>
 </div>

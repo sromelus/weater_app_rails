@@ -1,0 +1,15 @@
+<% weather_forecasts.each do |forecast| %>
+  <div class="weather_card">
+    <div class="weather_card_header">
+      <%= forecast.city %>, <%= forecast.state %>
+    </div>
+    <div class="weather_card_body">
+      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
+    </div>
+    <div class="weather_card_footer">
+      <p>Temp: <%= forecast.current_temp %>° F</p>
+      <p>Max: <%= forecast.temp_max %>° F</p>
+      <p>Min: <%= forecast.temp_low %>° F</p>
+    </div>
+  </div>
+<% end %>

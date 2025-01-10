@@ -1,0 +1,145 @@
+<style>
+  .weather-forecast-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 150px auto;
+    gap: 20px;
+  }
+
+  .weather_card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 15px;
+    width: 300px;
+    transition: transform 0.2s;
+  }
+
+  .weather_card:hover {
+    transform: translateY(-5px);
+  }
+
+  .weather_card_header {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 15px;
+  }
+
+  .weather_card_body {
+    padding: 15px 0;
+  }
+
+  .weather_card_body img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .weather_card_footer {
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+    margin-top: 15px;
+  }
+
+  .weather_card_footer p {
+    margin: 8px 0;
+    color: #34495e;
+    font-size: 1.1em;
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+  }
+
+  .search-form {
+    display: flex;
+    gap: 10px;
+  }
+
+  .search-input {
+    padding: 8px 15px;
+    border: 2px solid #ddd;
+    border-radius: 20px;
+    font-size: 1em;
+    width: 200px;
+    transition: border-color 0.3s;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #3498db;
+  }
+
+  .search-button {
+    padding: 8px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .search-button:hover {
+    background-color: #2980b9;
+  }
+</style>
+
+
+
+<% @weather_forecasts.each do |weather_forecast| %>
+  <%#= weather_forecast.city %>
+<% end %>
+
+<div class="search-container">
+  <%= form_with url: weather_forecasts_search_path, method: :get, remote: true, class: "search-form", data: { turbo: false } do %>
+    <%= text_field_tag :city, nil, placeholder: "Enter city", class: "search-input" %>
+    <%= submit_tag "Search", class: "search-button" %>
+  <% end %>
+</div>
+
+<div class="weather-forecast-list">
+  <div class="weather_card">
+    <div class="weather_card_header">
+      <%= @weather_forecasts.last.city %>, <%= @weather_forecasts.last.state %>
+    </div>
+    <div class="weather_card_body">
+      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
+    </div>
+    <div class="weather_card_footer">
+      <p>Temp: <%= @weather_forecasts.last.current_temp %>° F</p>
+      <p>Max: <%= @weather_forecasts.last.temp_max %>° F</p>
+      <p>Min: <%= @weather_forecasts.last.temp_low %>° F</p>
+    </div>
+  </div>
+  <div class="weather_card">
+    <div class="weather_card_header">
+      <%= @weather_forecasts.last.city %>, <%= @weather_forecasts.last.state %>
+    </div>
+    <div class="weather_card_body">
+      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
+    </div>
+    <div class="weather_card_footer">
+      <p>Temp: <%= @weather_forecasts.last.current_temp %>° F</p>
+      <p>Max: <%= @weather_forecasts.last.temp_max %>° F</p>
+      <p>Min: <%= @weather_forecasts.last.temp_low %>° F</p>
+    </div>
+  </div>
+  <div class="weather_card">
+    <div class="weather_card_header">
+      <%= @weather_forecasts.last.city %>, <%= @weather_forecasts.last.state %>
+    </div>
+    <div class="weather_card_body">
+      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
+    </div>
+    <div class="weather_card_footer">
+      <p>Temp: <%= @weather_forecasts.last.current_temp %>° F</p>
+      <p>Max: <%= @weather_forecasts.last.temp_max %>° F</p>
+      <p>Min: <%= @weather_forecasts.last.temp_low %>° F</p>
+    </div>
+  </div>
+</div>

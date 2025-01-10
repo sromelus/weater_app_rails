@@ -9,7 +9,7 @@
 #   end
 
 
-zip_code = ZipCode.find_or_create_by!(code: 12345)
+zip_code = ZipCode.find_or_create_by!(code: 94103)
 
-WeatherForecast.create!(zip_code: zip_code, city: "New York", state: "NY", current_temp: 70.0, date: Date.today)
+WeatherForecast.create!(zip_code: zip_code, city: "San Francisco", state: "CA", current_temp: 70.0, date: Date.today, temp_max: 75.0, temp_low: 65.0, latitude: 40.7128, longitude: -74.0060)
 

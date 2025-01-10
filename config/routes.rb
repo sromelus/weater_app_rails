@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get "weather_forecasts/search", to: "weather_forecasts#search", as: :weather_forecasts_search
   resources :weather_forecasts
 

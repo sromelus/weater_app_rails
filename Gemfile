@@ -63,6 +63,7 @@ group :test do
   gem "faker"
   gem "shoulda-matchers", "~> 6.0"
   gem "webmock"
+  gem "rails-controller-testing"
 end
 
 gem "geocoder"

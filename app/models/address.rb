@@ -37,7 +37,8 @@ class Address
     private
 
     def state_zip_valid?
-        unless @state_zip.match?(/\A*\d{5}/)
+        return if @state_zip.nil?
+        unless @state_zip.match?(/\A.*\d{5}/)
             errors.add(:address, "is invalid, please use the format 'Street, City, State Zip' or 'City, State Zip'")
         end
     end

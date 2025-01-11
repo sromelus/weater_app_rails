@@ -54,7 +54,7 @@ RSpec.describe WeatherLookupService do
       before do
         allow(address).to receive(:valid?).and_return(true)
         allow(address).to receive(:formatted_address).and_return("123 Main St, Boston, MA 02108")
-        allow(Geocoder).to receive(:search).and_return([location])
+        allow(Geocoder).to receive(:search).and_return([ location ])
       end
 
       it "returns a success result with weather data" do
@@ -81,4 +81,3 @@ RSpec.describe WeatherLookupService do
     end
   end
 end
-

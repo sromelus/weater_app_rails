@@ -1,6 +1,6 @@
 class WeatherClientService
   include HTTParty
-  base_uri 'https://api.weatherapi.com/v1'
+  base_uri "https://api.weatherapi.com/v1"
 
   def initialize
     @api_key = Rails.application.credentials.weatherapi[:api_key]

@@ -78,8 +78,10 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
         run: |
+          bin/rails db:drop db:create db:schema:load
           bin/rails db:test:prepare
           bundle exec rspec
 

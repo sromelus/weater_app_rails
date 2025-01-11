@@ -87,59 +87,49 @@
   .search-button:hover {
     background-color: #2980b9;
   }
+
+  .alert-danger {
+    color: red;
+  }
+
+  .alert {
+    text-align: center;
+    margin: 20px auto;
+    border: 1px solid red;
+    border-radius: 10px;
+    padding: 10px;
+    width: 300px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 </style>
 
 
-
-<% @weather_forecasts.each do |weather_forecast| %>
-  <%#= weather_forecast.city %>
+<% if flash.now[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash.now[:alert] %>
+  </div>
 <% end %>
 
 <div class="search-container">
   <%= form_with url: weather_forecasts_search_path, method: :get, remote: true, class: "search-form", data: { turbo: false } do %>
-    <%= text_field_tag :address, "61 locust st, medford, ma", placeholder: "Enter address", class: "search-input" %>
+    <%= text_field_tag :address, nil, placeholder: "Enter address", class: "search-input" %>
     <%= submit_tag "Search", class: "search-button" %>
   <% end %>
 </div>
 
+
 <div class="weather-forecast-list">
-  <div class="weather_card">
-    <div class="weather_card_header">
-      <%= @weather_forecasts.last.city %>, <%= @weather_forecasts.last.state %>
-    </div>
-    <div class="weather_card_body">
-      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
-    </div>
-    <div class="weather_card_footer">
-      <p>Temp: <%= @weather_forecasts.last.current_temp %>° F</p>
-      <p>Max: <%= @weather_forecasts.last.temp_max %>° F</p>
-      <p>Min: <%= @weather_forecasts.last.temp_low %>° F</p>
-    </div>
-  </div>
-  <div class="weather_card">
-    <div class="weather_card_header">
-      <%= @weather_forecasts.last.city %>, <%= @weather_forecasts.last.state %>
-    </div>
-    <div class="weather_card_body">
-      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
-    </div>
-    <div class="weather_card_footer">
-      <p>Temp: <%= @weather_forecasts.last.current_temp %>° F</p>
-      <p>Max: <%= @weather_forecasts.last.temp_max %>° F</p>
-      <p>Min: <%= @weather_forecasts.last.temp_low %>° F</p>
-    </div>
-  </div>
-  <div class="weather_card">
-    <div class="weather_card_header">
-      <%= @weather_forecasts.last.city %>, <%= @weather_forecasts.last.state %>
-    </div>
-    <div class="weather_card_body">
-      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
-    </div>
-    <div class="weather_card_footer">
-      <p>Temp: <%= @weather_forecasts.last.current_temp %>° F</p>
-      <p>Max: <%= @weather_forecasts.last.temp_max %>° F</p>
-      <p>Min: <%= @weather_forecasts.last.temp_low %>° F</p>
-    </div>
-  </div>
+  <%= render "weather_forecasts/weather_forecasts",
+    locals: {
+      weather_forecast: @weather_forecast,
+      result_text: "Weather Search Result For:",
+      cache_hit: @cache_hit
+    } if @weather_forecast.present?
+  %>
+  <% @weather_forecasts.each do |weather_forecast| %>
+    <%= render "weather_forecasts/weather_forecasts", locals: { weather_forecast: weather_forecast } %>
+  <% end %>
 </div>

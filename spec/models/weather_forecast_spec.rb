@@ -7,5 +7,6 @@ RSpec.describe WeatherForecast, type: :model do
     it { should belong_to(:zip_code) }
     it { should validate_presence_of(:date) }
     it { should validate_presence_of(:current_temp) }
+    it { should validate_presence_of(:condition_icon) }
   end
 end

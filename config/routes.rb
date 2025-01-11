@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "weather_forecasts/search", to: "weather_forecasts#search", as: :weather_forecasts_search
-  resources :weather_forecasts
+  resources :weather_forecasts, only: [:index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

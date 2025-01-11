@@ -1,15 +1,29 @@
-<% weather_forecasts.each do |forecast| %>
-  <div class="weather_card">
-    <div class="weather_card_header">
-      <%= forecast.city %>, <%= forecast.state %>
+<style>
+    .weather_card_container {
+      box-shadow: 0 2px 10px green;
+      border-radius: 10px;
+    }
+</style>
+
+
+
+
+<div class="<%= "weather_card_container" if locals[:result_text].present? %>">
+    <h3 style="text-align: center;"><%= locals[:result_text] %></h3>
+    <div class="weather_card">
+        <div class="weather_card_header">
+            <%= locals[:weather_forecast].zip_code.city %>, <%= locals[:weather_forecast].zip_code.state %><br/>
+        </div>
+        <div class="weather_card_body">
+            <%= image_tag locals[:weather_forecast]&.condition_icon || "https://cdn.weatherapi.com/weather/64x64/day/113.png" %>
+        </div>
+        <div class="weather_card_footer">
+            <p>Temp: <%= locals[:weather_forecast].current_temp %>° F</p>
+            <p>Max: <%= locals[:weather_forecast].high_temp %>° F</p>
+            <p>Min: <%= locals[:weather_forecast].low_temp %>° F</p>
+        </div>
+        <div style="text-align: center; margin-top: 5px;">
+            <small><%= "Data loaded from cache" if locals[:cache_hit] %></small>
+        </div>
     </div>
-    <div class="weather_card_body">
-      <%= image_tag "https://www.accuweather.com/images/weathericons/01d.png" %>
-    </div>
-    <div class="weather_card_footer">
-      <p>Temp: <%= forecast.current_temp %>° F</p>
-      <p>Max: <%= forecast.temp_max %>° F</p>
-      <p>Min: <%= forecast.temp_low %>° F</p>
-    </div>
-  </div>
-<% end %>
+</div>

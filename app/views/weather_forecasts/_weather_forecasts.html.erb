@@ -4,11 +4,15 @@
         <div class="weather_card_header">
             <%= locals[:weather_forecast].zip_code.city %>, <%= locals[:weather_forecast].zip_code.state %><br/>
         </div>
-        <div class="weather_card_body">
+        <div class="weather_card_body" style="display: flex; align-items: center;">
             <%= image_tag locals[:weather_forecast]&.condition_icon || "https://cdn.weatherapi.com/weather/64x64/day/113.png" %>
+            <div class="weather_card_body_text">
+                <p><%= locals[:weather_forecast].condition %></p>
+                <p>Current Temp: <%= locals[:weather_forecast].current_temp %>° F</p>
+                <p>Feels like: <%= locals[:weather_forecast].feels_like %>° F</p>
+            </div>
         </div>
         <div class="weather_card_footer">
-            <p>Temp: <%= locals[:weather_forecast].current_temp %>° F</p>
             <p>Max: <%= locals[:weather_forecast].high_temp %>° F</p>
             <p>Min: <%= locals[:weather_forecast].low_temp %>° F</p>
         </div>

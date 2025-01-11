@@ -28,6 +28,7 @@ Data Model Design: https://drive.google.com/file/d/1W8dUIUVQKnxtsQeSqzflGYeU3jau
 
 2. Start the Rails server:
 - rails db:prepare
+- rails dev:cache - enables caching in memory cache store
 - rails server
 
 3. Run tests:

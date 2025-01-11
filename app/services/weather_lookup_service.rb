@@ -28,7 +28,7 @@ class WeatherLookupService
 
     weather_forecast = Rails.cache.fetch(cache_key, expires_in: 10.seconds) do
       zip_code = ZipCode.find_or_create_by(code: location.postal_code)
-      forecast_data = WeatherService.new.get_forecast(location.latitude, location.longitude)
+      forecast_data = WeatherClientService.new.get_forecast(location.latitude, location.longitude)
 
       forecast_data ? WeatherForecast.create_or_update_from_api(forecast_data, zip_code) : []
     end

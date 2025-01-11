@@ -1,4 +1,4 @@
-class WeatherService
+class WeatherClientService
   include HTTParty
   base_uri "api.weatherapi.com/v1"
 

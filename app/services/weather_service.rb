@@ -43,7 +43,7 @@ class WeatherService
     {
       "location" => { "name" => "Medford", "region" => "Massachusetts" },
       "current" => { "temp_f" => 30.9, "condition" => { "text" => "Sunny", "icon" => "//cdn.weatherapi.com/weather/64x64/day/113.png" } },
-      "forecast" => { "forecastday" => [{ "day" => { "maxtemp_f" => 38.1, "mintemp_f" => 20.1 } }] }
+      "forecast" => { "forecastday" => [ { "day" => { "maxtemp_f" => 38.1, "mintemp_f" => 20.1 } } ] }
     }
   end
 end

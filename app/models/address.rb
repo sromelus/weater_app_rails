@@ -14,7 +14,7 @@ class Address
     validate :state_zip_valid?
 
     def parse
-        address = @address.split(',')
+        address = @address.split(",")
 
         if address.length == 2
             {
@@ -42,4 +42,3 @@ class Address
         end
     end
 end
-

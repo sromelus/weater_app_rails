@@ -30,4 +30,3 @@ class WeatherForecast < ApplicationRecord
     end
   end
 end
-

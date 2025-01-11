@@ -1,4 +1,4 @@
-require 'ostruct'
+require "ostruct"
 
 class WeatherLookupService
   def initialize(address)
@@ -6,7 +6,7 @@ class WeatherLookupService
   end
 
   def perform
-    return failure_result(address.errors.full_messages.join(', ')) unless address.valid?
+    return failure_result(address.errors.full_messages.join(", ")) unless address.valid?
 
     location = find_location
     return failure_result("Could not find location for that address") unless location

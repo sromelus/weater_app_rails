@@ -1,5 +1,5 @@
 class WeatherForecastsController < ApplicationController
-  before_action :set_weather_forecast, only: [:index, :search]
+  before_action :set_weather_forecast, only: [ :index, :search ]
 
   def index
   end

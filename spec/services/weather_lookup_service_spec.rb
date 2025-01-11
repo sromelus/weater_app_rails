@@ -67,7 +67,7 @@ RSpec.describe WeatherLookupService do
       it "caches the weather forecast" do
         cache_key = "weather_forecast_#{location.postal_code}"
         expect(Rails.cache).to receive(:exist?).with(cache_key)
-        expect(Rails.cache).to receive(:fetch).with(cache_key, expires_in: 10.seconds)
+        expect(Rails.cache).to receive(:fetch).with(cache_key, expires_in: 30.minutes)
 
         subject.perform
       end

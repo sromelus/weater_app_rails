@@ -23,7 +23,7 @@ class WeatherForecastsController < ApplicationController
   private
 
   def set_weather_forecast
-    @weather_forecasts = Rails.cache.fetch("weather_forecasts", expires_in: 5.seconds) do
+    @weather_forecasts = Rails.cache.fetch("weather_forecasts", expires_in: 30.minutes) do
       WeatherForecast.limit(3).includes(:zip_code).order(created_at: :desc)
     end
   end

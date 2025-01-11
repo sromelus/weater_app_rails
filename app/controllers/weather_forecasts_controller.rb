@@ -7,31 +7,14 @@ class WeatherForecastsController < ApplicationController
   def search
     result = WeatherLookupService.new(Address.new(params[:address])).perform
 
-    if address.valid?
-      results = Geocoder.search(address.formatted_address)
-      if location = results.first
-        @latitude = location.latitude
-        @longitude = location.longitude
-        @zipcode = location.postal_code
-
-        @cache_hit = Rails.cache.exist?("weather_forecast_#{@zipcode}")
-
-        @weather_forecast = Rails.cache.fetch("weather_forecast_#{@zipcode}", expires_in: 10.seconds) do
-          zip_code = ZipCode.find_or_create_by(code: @zipcode)
-          weather_service = WeatherService.new
-          forecast_data = weather_service.get_forecast(@latitude, @longitude)
-
-          if forecast_data
-            WeatherForecast.create_or_update_from_api(forecast_data, zip_code)
-          else
-            []
-          end
-        end
-      else
-        flash.now[:alert] = "Could not find location for that address"
-      end
+    if result.success?
+      @weather_forecast = result.data[:weather_forecast]
+      @cache_hit = result.data[:cache_hit]
+      @latitude = result.data[:location].latitude
+      @longitude = result.data[:location].longitude
+      @zipcode = result.data[:location].postal_code
     else
-      flash.now[:alert] = address.errors.full_messages.join(', ')
+      flash.now[:alert] = result.error
     end
 
     render :index

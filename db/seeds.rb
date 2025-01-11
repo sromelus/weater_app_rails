@@ -20,4 +20,3 @@ WeatherForecast.find_or_create_by!(zip_code: zip_code1, current_temp: 70.4, date
 WeatherForecast.find_or_create_by!(zip_code: zip_code2, current_temp: 87.2, date: Date.today, high_temp: 90.0, low_temp: 65.0, condition_icon: "//cdn.weatherapi.com/weather/64x64/day/113.png", condition: "Sunny", feels_like: 89.0, wind_speed: 10.0)
 WeatherForecast.find_or_create_by!(zip_code: zip_code3, current_temp: 62.5, date: Date.today, high_temp: 65.0, low_temp: 60.0, condition_icon: "//cdn.weatherapi.com/weather/64x64/day/119.png", condition: "Cloudy", feels_like: 64.0, wind_speed: 10.0)
 WeatherForecast.find_or_create_by!(zip_code: zip_code4, current_temp: 73.0, date: Date.today, high_temp: 78.0, low_temp: 70.0, condition_icon: "//cdn.weatherapi.com/weather/64x64/day/176.png", condition: "Partly cloudy", feels_like: 70.0, wind_speed: 10.0)
-
